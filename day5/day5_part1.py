@@ -4,12 +4,14 @@ def read_parts(filename):
         whole_file = file.read()
     return whole_file.split('\n\n')
 
+
 def filter_numbers(line):
     numbers = []
     for string in line.split(' '):
         if string.isdigit():
             numbers.append(int(string))
     return numbers
+
 
 def map_of_part(part):
     lines = part.split('\n')
@@ -19,17 +21,20 @@ def map_of_part(part):
         map_of_part.append((source_start, destination_start, map_range))
     return map_of_part
 
+
 def map_transtion(transition_map, input):
     for source_start, destination_start, map_range in transition_map:
         if source_start <= input < source_start + map_range:
             return destination_start + input - source_start
     return input
 
+
 def location(seed, maps):
     current_value = seed
     for map in maps:
         current_value = map_transtion(map, current_value)
     return current_value
+
 
 if __name__ == "__main__":
     parts = read_parts('input_test.txt')

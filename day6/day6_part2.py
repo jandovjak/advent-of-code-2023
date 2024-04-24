@@ -3,10 +3,12 @@ def readlines(filename):
         lines = [line.strip() for line in file.readlines()]
     return lines
 
+
 def number_from_line(line):
     _, numbers = line.split(':')
     numbers = [number for number in numbers.split(' ') if number]
     return int(''.join(numbers))
+
 
 def ways_to_win(time, record_distance):
     total_ways = 0

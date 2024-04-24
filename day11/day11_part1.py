@@ -3,8 +3,10 @@ def readlines(filename):
         lines = [line.strip() for line in file.readlines()]
     return lines
 
+
 def empty_line(line):
     return all(character == '.' for character in line)
+
 
 def galaxies_points(universe):
     points = []
@@ -14,12 +16,14 @@ def galaxies_points(universe):
                 points.append((row, col))
     return points
 
+
 def rows_to_expand(universe):
     row_indexes = []
     for index, row in enumerate(universe):
         if empty_line(row):
             row_indexes.append(index)
     return row_indexes
+
 
 def expanded_between_points(start_index, end_index, indexes):
     expanded_between_points = []
@@ -30,18 +34,29 @@ def expanded_between_points(start_index, end_index, indexes):
             expanded_between_points.append(index)
     return len(expanded_between_points)
 
+
 def distance_of_galaxy(start, end, row_indexes, cols_indexes):
     start_row, start_col = start
     end_row, end_col = end
-    expanded_rows_count = expanded_between_points(start_row, end_row, row_indexes)
-    expanded_cols_count = expanded_between_points(start_col, end_col, cols_indexes)
-    return abs(start_row - end_row) + abs(start_col - end_col) + expanded_rows_count + expanded_cols_count
+    expanded_rows_count = expanded_between_points(start_row,
+                                                  end_row,
+                                                  row_indexes)
+    expanded_cols_count = expanded_between_points(start_col,
+                                                  end_col,
+                                                  cols_indexes)
+    return abs(start_row - end_row) + abs(start_col - end_col) \
+        + expanded_rows_count + expanded_cols_count
+
 
 def total_length_from_galaxy(galaxy, galaxies, row_indexes, cols_indexes):
     lengths = []
     for next_galaxy in galaxies:
-        lengths.append(distance_of_galaxy(galaxy, next_galaxy, row_indexes, cols_indexes))
+        lengths.append(distance_of_galaxy(galaxy,
+                                          next_galaxy,
+                                          row_indexes,
+                                          cols_indexes))
     return sum(lengths)
+
 
 def cols_to_expand(universe):
     cols_indexes = []
@@ -51,6 +66,7 @@ def cols_to_expand(universe):
             cols_indexes.append(index)
     return cols_indexes
 
+
 if __name__ == "__main__":
     universe = readlines('input_test.txt')
     galaxies = galaxies_points(universe)
@@ -58,5 +74,8 @@ if __name__ == "__main__":
     col_indexes = cols_to_expand(universe)
     total = 0
     for galaxy in galaxies:
-        total += total_length_from_galaxy(galaxy, galaxies, row_indexes, col_indexes)
+        total += total_length_from_galaxy(galaxy,
+                                          galaxies,
+                                          row_indexes,
+                                          col_indexes)
     print(total//2)

@@ -3,14 +3,18 @@ def readlines(filename):
         lines = [line.strip() for line in file.readlines()]
     return lines
 
+
 def numbers_from_line(line):
     return [int(number) for number in line.split(' ') if number]
+
 
 def all_zeroes(numbers):
     return all(number == 0 for number in numbers)
 
+
 def differences(numbers):
     return [x - y for x, y in zip(numbers, numbers[1:])]
+
 
 def predicted_value(numbers):
     difference_steps = [numbers]
@@ -25,6 +29,7 @@ def predicted_value(numbers):
         placeholder = difference_steps[i][-1] - difference_steps[i - 1][-1]
         difference_steps[i].append(placeholder)
     return difference_steps[-1][-1]
+
 
 if __name__ == "__main__":
     lines = readlines('input_test.txt')

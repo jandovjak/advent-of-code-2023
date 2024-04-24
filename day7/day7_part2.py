@@ -3,19 +3,19 @@ from functools import cmp_to_key
 CARDS = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'Q', 'K', 'A']
 
 CARDS_VALUES = {
-    'J' : 1,
-    '2' : 2,
-    '3' : 3,
-    '4' : 4,
-    '5' : 5,
-    '6' : 6,
-    '7' : 7,
-    '8' : 8,
-    '9' : 9,
-    'T' : 10,
-    'Q' : 12,
-    'K' : 13,
-    'A' : 14
+    'J': 1,
+    '2': 2,
+    '3': 3,
+    '4': 4,
+    '5': 5,
+    '6': 6,
+    '7': 7,
+    '8': 8,
+    '9': 9,
+    'T': 10,
+    'Q': 12,
+    'K': 13,
+    'A': 14
 }
 
 FIVE_OF_A_KIND = 7
@@ -27,10 +27,12 @@ ONE_PAIR = 2
 HIGH_CARD = 1
 JOKER = 'J'
 
+
 def readlines(filename):
     with open(filename, 'r') as file:
         lines = [line.strip() for line in file.readlines()]
     return lines
+
 
 def type(hand):
     counts = [hand.count(card) for card in CARDS]
@@ -50,15 +52,17 @@ def type(hand):
         return ONE_PAIR
     return HIGH_CARD
 
+
 def compare_hands(first, second):
-     first_hand, first_type, _ = first
-     second_hand, second_type, _ = second
-     if first_type != second_type:
-         return first_type - second_type
-     for i in range(len(first_hand)):
-         if CARDS_VALUES[first_hand[i]] != CARDS_VALUES[second_hand[i]]:
-             return CARDS_VALUES[first_hand[i]] - CARDS_VALUES[second_hand[i]]
-     return 0
+    first_hand, first_type, _ = first
+    second_hand, second_type, _ = second
+    if first_type != second_type:
+        return first_type - second_type
+    for i in range(len(first_hand)):
+        if CARDS_VALUES[first_hand[i]] != CARDS_VALUES[second_hand[i]]:
+            return CARDS_VALUES[first_hand[i]] - CARDS_VALUES[second_hand[i]]
+    return 0
+
 
 if __name__ == "__main__":
     lines = readlines('input_test.txt')

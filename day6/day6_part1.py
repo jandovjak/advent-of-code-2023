@@ -3,9 +3,11 @@ def readlines(filename):
         lines = [line.strip() for line in file.readlines()]
     return lines
 
+
 def numbers_from_line(line):
     _, numbers = line.split(':')
     return [int(number) for number in numbers.split(' ') if number]
+
 
 def ways_to_win(time, record_distance):
     total_ways = 0

@@ -3,6 +3,7 @@ def readlines(filename):
         lines = [line.strip() for line in file.readlines()]
     return lines
 
+
 def nodes_from_line(nodes_lines):
     nodes = {}
     for line in nodes_lines:
@@ -11,8 +12,10 @@ def nodes_from_line(nodes_lines):
         nodes[node] = (left.replace('(', ''), right.replace(')', ''))
     return nodes
 
+
 def get_direction(index, directions):
     return directions[index % len(directions)]
+
 
 def steps(start_node, end_nodes, directions, nodes):
     steps = 0
@@ -27,16 +30,19 @@ def steps(start_node, end_nodes, directions, nodes):
         steps += 1
     return steps
 
+
 def gcd(x, y):
     while y != 0:
         (x, y) = (y, x % y)
     return x
+
 
 def least_common_multiplier(steps):
     lcm = 1
     for step in steps:
         lcm = lcm * step // gcd(lcm, step)
     return lcm
+
 
 if __name__ == "__main__":
     lines = readlines('input_test3.txt')

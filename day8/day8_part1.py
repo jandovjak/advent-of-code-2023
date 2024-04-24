@@ -3,6 +3,7 @@ def readlines(filename):
         lines = [line.strip() for line in file.readlines()]
     return lines
 
+
 def nodes_from_line(nodes_lines):
     nodes = {}
     for line in nodes_lines:
@@ -11,8 +12,10 @@ def nodes_from_line(nodes_lines):
         nodes[node] = (left.replace('(', ''), right.replace(')', ''))
     return nodes
 
+
 def get_direction(index, directions):
     return directions[index % len(directions)]
+
 
 def steps(start_node, end_node, directions, nodes):
     steps = 0
@@ -26,6 +29,7 @@ def steps(start_node, end_node, directions, nodes):
             current_node = right
         steps += 1
     return steps
+
 
 if __name__ == "__main__":
     lines = readlines('input_test.txt')
