@@ -4,10 +4,12 @@ CUBES = {
     'blue': 14
 }
 
+
 def readlines(filename):
     with open(filename, 'r') as file:
         lines = [line.strip() for line in file.readlines()]
     return lines
+
 
 def events_from_line(line):
     all_events = line.split(':')[1]
@@ -20,12 +22,13 @@ def events_from_line(line):
         events.append(current_event)
     return events
 
+
 def power_of_game(line):
     power_of_game = 1
     game_cubes = {
                 'red': 0,
                 'green': 0,
-                'blue': 0 }
+                'blue': 0}
     for event in events_from_line(line):
         for color, number in event:
             if number > game_cubes.get(color, 0):
@@ -41,4 +44,3 @@ if __name__ == "__main__":
     for line in lines:
         total += power_of_game(line)
     print(total)
-            

@@ -10,10 +10,12 @@ number_dict = {
     "nine": 9
 }
 
+
 def readlines(filename):
     with open(filename, 'r') as file:
         lines = [line.strip() for line in file.readlines()]
     return lines
+
 
 def line_starts_with_number(line):
     for key in number_dict.keys():
@@ -29,12 +31,6 @@ def line_start_to_number(line):
     return -1
 
 
-def line_starts_with_number(line):
-    for key in number_dict.keys():
-        if line.startswith(key):
-            return True
-    return False
-
 def first_number_from_line(line):
     for i in range(len(line)):
         if line[i].isdigit():
@@ -42,6 +38,7 @@ def first_number_from_line(line):
         if line_starts_with_number(line[i:]):
             return line_start_to_number(line[i:])
     return 0
+
 
 def last_number_from_line(line):
     for i in range(-1, -1 - len(line), -1):
@@ -51,16 +48,19 @@ def last_number_from_line(line):
             return line_start_to_number(line[i:])
     return 0
 
+
 def number_from_line(line):
     first_number = first_number_from_line(line)
     last_number = last_number_from_line(line)
     return first_number * 10 + last_number
+
 
 def sum_of_numbers(lines):
     total = 0
     for line in lines:
         total += number_from_line(line)
     return total
+
 
 if __name__ == "__main__":
     lines = readlines('input_test2.txt')

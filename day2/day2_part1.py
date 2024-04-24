@@ -4,10 +4,12 @@ CUBES = {
     'blue': 14
 }
 
+
 def readlines(filename):
     with open(filename, 'r') as file:
         lines = [line.strip() for line in file.readlines()]
     return lines
+
 
 def events_from_line(line):
     all_events = line.split(':')[1]
@@ -20,10 +22,12 @@ def events_from_line(line):
         events.append(current_event)
     return events
 
+
 def game_id(line):
     game = line.split(':')[0]
     _, game_id = game.split(' ')
     return int(game_id)
+
 
 def is_valid_game(line):
     is_valid = True
@@ -34,7 +38,6 @@ def is_valid_game(line):
     return is_valid
 
 
-
 if __name__ == "__main__":
     lines = readlines('input_test.txt')
     total = 0
@@ -42,4 +45,3 @@ if __name__ == "__main__":
         if is_valid_game(line):
             total += game_id(line)
     print(total)
-            
