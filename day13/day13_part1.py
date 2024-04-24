@@ -4,11 +4,13 @@ def read_parts(filename):
         whole_file = file.read()
     return whole_file.split('\n\n')
 
+
 def pattern_part(part):
     pattern = []
     for line in part.split('\n'):
         pattern.append(list(line))
     return pattern
+
 
 def vertical_reflection(pattern):
     reflections_total = 0
@@ -23,9 +25,12 @@ def vertical_reflection(pattern):
             reflections_total = i
     return reflections_total
 
+
 def horizontal_reflection(pattern):
-    flipped_pattern = [[pattern[j][i] for j in range(len(pattern))] for i in range(len(pattern[0]))]
+    flipped_pattern = [[pattern[j][i] for j in range(len(pattern))]
+                       for i in range(len(pattern[0]))]
     return vertical_reflection(flipped_pattern)
+
 
 if __name__ == "__main__":
     parts = read_parts('input_test.txt')

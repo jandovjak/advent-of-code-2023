@@ -4,11 +4,13 @@ def read_parts(filename):
         whole_file = file.read()
     return whole_file.split('\n\n')
 
+
 def pattern_part(part):
     pattern = []
     for line in part.split('\n'):
         pattern.append(list(line))
     return pattern
+
 
 def vertical_reflections(pattern):
     reflections = []
@@ -23,14 +25,18 @@ def vertical_reflections(pattern):
             reflections.append(i)
     return reflections
 
+
 def horizontal_reflections(pattern):
-    flipped_pattern = [[pattern[j][i] for j in range(len(pattern))] for i in range(len(pattern[0]))]
+    flipped_pattern = [[pattern[j][i] for j in range(len(pattern))]
+                       for i in range(len(pattern[0]))]
     return vertical_reflections(flipped_pattern)
+
 
 def smudge(old_character):
     if old_character == '.':
         return '#'
     return '.'
+
 
 def find_new_reflection(old_vertical_reflections, new_vertical_reflections):
     if len(new_vertical_reflections) == 0:
@@ -43,6 +49,7 @@ def find_new_reflection(old_vertical_reflections, new_vertical_reflections):
         return 0
     return new_vertical_reflections[0]
 
+
 def new_vertical_reflection(pattern, old_vertical_reflections):
     for i in range(len(pattern)):
         for j in range(len(pattern[i])):
@@ -50,14 +57,19 @@ def new_vertical_reflection(pattern, old_vertical_reflections):
             pattern[i][j] = smudge(old_character)
             new_vertical_reflections = vertical_reflections(pattern)
             pattern[i][j] = old_character
-            new_vertical_reflection = find_new_reflection(old_vertical_reflections, new_vertical_reflections)
+            new_vertical_reflection = find_new_reflection(
+                old_vertical_reflections,
+                new_vertical_reflections)
             if new_vertical_reflection != 0:
                 return new_vertical_reflection
     return 0
 
+
 def new_horizontal_reflection(pattern, old_horizontal_reflections):
-    flipped_pattern = [[pattern[j][i] for j in range(len(pattern))] for i in range(len(pattern[0]))]
+    flipped_pattern = [[pattern[j][i] for j in range(len(pattern))]
+                       for i in range(len(pattern[0]))]
     return new_vertical_reflection(flipped_pattern, old_horizontal_reflections)
+
 
 if __name__ == "__main__":
     parts = read_parts('input_test.txt')
@@ -69,5 +81,6 @@ if __name__ == "__main__":
         old_vertical_reflections = vertical_reflections(pattern)
         total += new_vertical_reflection(pattern, old_vertical_reflections)
         old_horizontal_reflections = horizontal_reflections(pattern)
-        total += 100 * new_horizontal_reflection(pattern, old_horizontal_reflections)
+        total += 100 * new_horizontal_reflection(pattern,
+                                                 old_horizontal_reflections)
     print(total)
